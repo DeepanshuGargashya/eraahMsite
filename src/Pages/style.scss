@@ -1,0 +1,529 @@
+.App{
+    width: 480px;
+}
+@media screen and (max-width:767px) {
+    .App{
+        width: 100% !important;
+    }
+    .bottomBar{
+       margin: auto;
+    //    display: flex;
+        width: 100% !important;
+    }
+    
+}
+@media screen and (min-width:576px) and (max-width:767px) {
+    .bottomBar{
+        width: 576px !important;
+        margin: auto;
+        display: flex !important;
+    }
+    
+}
+@media screen and (max-width:300px){
+    .bottomBar li{
+        font-size: 10px !important;
+    }
+    
+}
+@media screen and (max-width:420px) {
+    .card{
+        width: 80% !important;
+        margin: auto;
+    }
+    
+}
+.container{
+    // margin: auto;
+}
+.bottomBar{
+    background-color: #F4F4F4;
+    position: fixed;
+    bottom: 0;
+    width: 480px;
+    z-index: 10;
+    margin-bottom: 0;
+    padding: 10px;
+}
+.ul{
+    position: sticky;
+    
+    bottom: 0;
+    // left: 0;
+    // right: 0;
+    width: 480px;
+    background-color: #F4F4F4 !important;
+    list-style-type: none;
+    li{
+        list-style-type: none;
+    }
+}
+.css-118p9r0-MuiButtonBase-root-MuiBottomNavigationAction-root{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+.css-1bjk3jo-MuiButtonBase-root-MuiBottomNavigationAction-root{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+.css-118p9r0-MuiButtonBase-root-MuiBottomNavigationAction-root{
+    width: 10px !important;
+    // padding: 0px !important;
+}
+.css-1bjk3jo-MuiButtonBase-root-MuiBottomNavigationAction-root.Mui-selected{
+    color: #6100FF !important;
+}
+li{
+    text-decoration: none;
+}
+.form-control{
+    border: none;
+    padding: 10px;
+    width: 80%;
+    margin: auto !important;
+    border-radius: 10px;
+}
+.header{
+    background-color: #6100FF;
+    p{
+        font-weight: 600;
+        color: white;
+    }
+}
+.impact{
+    background-color: #CEF3FF;
+}
+.kiddo{
+    background-color: #F5F5F5;
+    border-radius: 15px;
+    margin: 10px;
+}
+ .donateButton{
+    background-color: #6100FF;
+    border-radius: 100px;
+    color: white;
+    box-shadow: none !important;
+    width: fit-content;
+}
+.impactContainer{
+    border: 2px solid;
+
+border-image: linear-gradient(180deg, #6100FF 0%, #00C2FF 100%);
+border-color: red;
+p{
+    color: #929292;
+    font-size: 12px;
+}
+
+
+}
+.foundation{
+    background-color: #F4F4F4;
+    padding: 6px;
+    width: fit-content;
+}
+.pie{
+    border-radius: 10px;
+    border: 2px solid #F4F4F4;
+}
+.card {
+    width: 48%;
+    border: none;
+    box-shadow: 0px 0px 4px 0px #00000040;
+    z-index: 5;
+
+    h5{
+        color: #616161;
+        font-size: 12px;
+    }
+    .inr{
+        border-radius: 100px;
+        background-color: #CEF3FF;
+        color: #383838;
+        padding: 5px 14px;
+        width: 60%;
+        margin: auto;
+        text-align: center;
+        cursor: pointer;
+    }
+}
+.exploreBelow{
+    box-shadow: 0px -5px 25px 0px #00000040;
+    // position: absolute;
+
+}
+.ngoImage{
+ position: relative;
+ bottom: -90px;
+ left: 60px;
+}
+.explore h5{
+    color: #616161;
+    font-size: 15px;
+}
+.message{
+    background-color: #F4F4F4;
+    color: black;
+    border-radius: 100px;
+    border: none;
+    padding: 10px 45px !important;
+}
+.fed{
+    color: #ADADAD;
+    cursor: pointer;
+}
+.plus{
+    background-color: #FFF1C0;
+    border-radius: 100px;
+    border: none;
+    color: #FFC700;
+    width: fit-content;
+    margin: auto;
+    padding: 6px 12px !important;
+}
+.review{
+    background-color: #F4F4F4;
+    border-radius: 8px;
+    padding: 10px;
+    span{
+        color: #616161;
+        font-size: 15px;
+    }
+    p{
+        color: #8B8B8B;
+        font-size: 12px;
+    }
+}
+.about{
+    background-color: #F4F4F4;
+    border-radius: 8px;
+    padding: 40px 20px 20px 20px;
+}
+.cause{
+    color: #FFFFFF99;
+    cursor: pointer;
+}
+.search-tags .search{
+    // background-color: #EDEDED;
+    border-radius: 100px;
+    width: 18%;
+    padding: 6px;
+    text-align: center;
+    cursor: pointer;
+}
+.result p{
+    color: #929292;
+    font-size: 12px;
+}
+.causesContainer .card .card-body {
+    .leftt{
+    background-color: #FF756C38;
+    color: #FF4135;
+    border: none;
+    border-radius: 12px;
+    // width: fit-content;
+    font-size: 8px;
+    text-align: center;
+}
+    .days{
+    background-color: #FF756C38;
+    color: #FF4135;
+    border: none;
+    border-radius: 12px;
+    // width: fit-content;
+    font-size: 10px;
+    text-align: center;
+    padding: 6px;
+}
+ .foundation{
+   border: 0.2px solid #D1D1D1;
+   color: #616161;
+   width: fit-content;
+   font-size: 8px;
+   border-radius: 12px;
+   text-align: center;
+ }
+}
+.progress{
+    height: 0.5rem !important;
+    .progress-bar{
+        background-color: #5628D2;
+    }
+}
+.childrensPost span{
+    font-size: 14px;
+
+}
+.ngoss{
+    border: 1px solid #E7E7E7;
+    padding: 10px;
+    border-radius: 12px;
+    .starssss{
+        background-color: #FFF1C0;
+        border-radius: 100px;
+        width: 34%;
+        padding: 6px;
+    }
+    .pointttt{
+        background-color: #DCF7FF;
+        border-radius: 100px;
+        width: 50%;
+        padding: 6px;
+    }
+}
+.updates {
+    background-color: #F6F0FF;
+    border-radius: 12px;
+    padding: 12px;
+    .mail{
+        background-color: #FF9E9E;
+        border-radius: 100px;
+        padding: 16px;
+    }
+    .verifyEmail{
+        color: #6100FF;
+        border: 2px solid #6100FF;
+        text-align: center;
+        padding: 3px;
+        width: fit-content;
+        border-radius: 100px;
+        cursor: pointer;
+    }
+}
+.rahull{
+// border: 2px solid !important;
+// border-image: linear-gradient(180deg, #6100FF 0%, #00C2FF 100%) !important;    
+// border: 2px solid transparent;
+// border-image: linear-gradient(to bottom, #6100FF, #00C2FF);
+// border-image-slice: 10;
+// background-size: cover;
+// border-radius: 12px;
+background: 
+linear-gradient(#ffffff 0 0) padding-box, /*this is your grey background*/
+linear-gradient(to bottom, #6100FF, #00C2FF) border-box;
+// color: #313149;
+padding: 10px;
+border: 3px solid transparent;
+border-radius: 15px;
+display: inline-block;
+p{
+    color: #929292;
+    font-size: 12px;
+}}
+.chatCard {
+    cursor: pointer;
+    p{
+        color: #616161;
+        font-size: 15px;
+    }
+    span{
+        color: #929292;
+        font-size: 12px;
+    }
+}
+
+.today{
+    margin-top: 10px;
+    background-color: #CEF3FF;
+    color: #8B8B8B;
+    width: 25%;
+    border-radius: 20px;
+    display: flex;
+    margin: auto;
+    text-align: center;
+    justify-content: center;
+}
+.camera{
+    background-color: #00C2FF;
+    border-radius: 100px;
+    padding: 6px;
+}
+.chatss{
+    height: 90vh;
+    position: relative;
+}
+.belowChat{
+    background-color: #F4F4F4;
+    border-radius: 100px;
+    position: relative;
+    bottom: -400px;
+}
+.donation{
+    background-color: #F4F4F4;
+    border-radius: 12px;
+    padding: 25px 15px 0px 15px;
+    width: 30%;
+    p{
+        color: #333333;
+        font-size: 10px;
+        padding-top: 6px;
+    }
+}
+.update{
+    background-color: #FFD66C47;
+    padding: 10px 5px ;
+    border-radius: 12px;
+    cursor: pointer;
+    .updateCircle{
+        background-color: #FFC700;
+        border-radius: 100px;
+        // padding: 3px 6px;
+    }
+
+}
+.settings .available .updateCircle{
+    background-color: #F4F4F4 !important;
+    border-radius: 12px;
+    padding: 5px 8px;
+}
+.causeBanner{
+    position: relative;
+    img{
+        width: 100%;
+    }
+    .arrowBack{
+        position: absolute;
+        top: 12px;
+        color: white;
+        left: 10px;
+        width: 90%;
+        .saved{
+            background-color: white;
+            border-radius: 100px;
+    padding: 8px 12px;
+        }
+    }
+}
+.education{
+    background-color: #FFC700;
+    border-radius: 4px;
+    width: fit-content;
+    padding: 4px;
+}
+.girls{
+    background-color: #F5F5F5;
+    padding: 10px;
+}
+.delhi{
+    border: 1px solid #D1D1D1;
+    border-radius: 100px;
+    padding: 5px;
+}
+@media screen and (max-width:350px) {
+    .media p{
+        font-size: 11px;
+    }
+    
+}
+.date{
+    box-shadow: 0px 4px 18px 0px #00000040;
+    background-color: white;
+
+}
+.events h5{
+    color: #5400DC;
+    font-weight: 500;
+    cursor: pointer;
+}
+.laxmiContent span{
+    color: #747272;
+    font-size: 12px;
+}
+.eventCard{
+    margin-bottom: 80px !important;
+}
+.teacherCard{
+    box-shadow: 0px 0px 8px 0px #00000040;
+    border: 1px solid #6100FF;
+    border-radius: 12px;
+    padding: 12px;
+    position: absolute;
+    // bottom: 2px;
+    background-color: white;
+}
+@media screen and (max-width:400px) {
+    .laxmi{
+        display: flex;
+        flex-wrap: wrap;
+        .laxmiImage{
+            margin: auto;
+        }
+    }
+    
+}
+@media screen and (max-width:473px) {
+    .pairing{
+        height:50vh !important;
+    }
+}
+@media screen and (max-width:400px) {
+    .pairing{
+        height:65vh !important;
+    }
+}
+.percentage{
+    background-color: #C3FFCB;
+    border-radius: 100px;
+    padding: 30px;
+    font-weight: 500;
+}
+.percentages{
+    background-color: #FFE1DF;
+    border-radius: 100px;
+    padding: 30px;
+    font-weight: 500;
+}
+.salary{
+    box-shadow: 0px 0px 4px 0px #00000040;
+    padding: 12px;
+    border-radius: 12px;
+    background-color: #D9D9D954;
+}
+.support{
+    p{
+        color: #7C7C7C}
+    .support1{
+        cursor: pointer;
+        background-color: #F4F4F4;
+        border-radius: 12px;
+        padding: 12px;
+        margin: 20px;
+        img{
+            display: flex;
+            margin: auto;
+        }
+    }
+}  
+.choose{
+    background-color: #F4F4F4;
+    padding: 15px;
+    width: fit-content;
+    margin: auto;
+    margin-top: 40px;
+    border-radius: 12px;
+    p{
+        margin-bottom: 0px;
+        color: #8B8B8B;
+        padding-right: 6px;
+    }
+}
+.teacher{
+    p{
+        color: #7C7C7C;
+    }
+}
+.teacherCardd{
+    box-shadow: 0px 1px 12.800000190734863px -3px #00000040;
+    border-radius: 12px;
+    padding: 15px;
+}
+.totalDonation{
+    background-color: #F4F4F4;
+    border-radius: 12px;
+    padding: 15px;
+}
+.inr{
+    border: 1px solid #D1D1D1;
+    background-color: white;
+    border-radius: 12px;
+}
