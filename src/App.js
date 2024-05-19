@@ -17,7 +17,7 @@ import ChatScreen from './Components/Chats/chatScreen';
 import Support from './Components/Support/support';
 import Teacher from './Components/Support/teacher';
 import Donation from './Components/Support/donation';
-
+import TeacherProfile from './Components/Support/TeacherProfile';
 function App() {
   const location = useLocation();
   const [value, setValue] = React.useState('home');
@@ -51,6 +51,7 @@ function App() {
         {/* <Route exact path='/support' element={<Support/>}/> */}
         <Route exact path='/teacher' element={<Teacher/>}/>
         <Route exact path='/donation' element={<Donation/>}/>
+        <Route exact path='/TeacherProfile' element={<TeacherProfile/>}/>
       </Routes>
       {/* </Suspense> */}
      
