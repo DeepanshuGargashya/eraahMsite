@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import OTPInput from "react-otp-input";
 import Popup from "../Components/Popup.js";
 import { donorSendOtp, donorVerifyOtp } from "../utils/apiFactory";
+import errahIcon from "../Assets/errah.png";
 // import * as styles from "./style.scss";
 import { useNavigate } from "react-router-dom";
 function LoginPage() {
@@ -74,14 +75,25 @@ function LoginPage() {
   return (
     <>
       {loading && <div></div>}
-      <div className="container px-0">
-        <div className="header shadow pb-2">
+      <div className="container border px-0" style={{ height: "99.5vh" }}>
+        <div
+          className="header shadow pb-2"
+          style={{ backgroundColor: "white" }}
+        >
           <div className="d-flex justify-content-between homepage px-5 pt-4 pb-2 align-items-center">
-            <img src={Anand} alt="" srcset="" />
+            <div
+              style={{ borderRadius: "50%", backgroundColor: "white" }}
+              className="p-3"
+            >
+              <img
+                src={errahIcon}
+                style={{ width: "2.2rem", height: "2.2rem" }}
+              />
+            </div>
           </div>
         </div>
 
-        <div className="col-lg-11 col-sm-11 col-md-11 col-11 m-auto mt-4 p-4 shadow bg-light  rounded">
+        <div className="col-lg-11 col-sm-11 col-md-11 col-11 m-auto mt-4 p-4 border bg-light  rounded">
           {/* <form> */}
 
           <div class="mb-3">
