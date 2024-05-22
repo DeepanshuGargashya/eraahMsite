@@ -4,7 +4,9 @@ export const getAllTeachersDonors = (callback, onError) => {
   axios
     .get(
       process.env.REACT_APP_baseUrl +
-        "/admin/getAllTeachers?id=6639ea14f815983e720a1350"
+        `/admin/getAllTeachers?id=${
+          JSON.parse(localStorage.getItem("donor"))._id
+        }`
     )
     .then((res) => {
       callback(res.data);
