@@ -17,7 +17,9 @@ function Impact() {
         <div className="header">
           <div className="d-flex justify-content-between homepage px-5 pt-4 pb-2 align-items-center">
             <p className="text-center mb-0">Impact</p>
-            <img src={Anand} alt="" />
+            <NavLink to={"/profile"}>
+              <img src={Anand} alt="" />
+            </NavLink>
           </div>
           <input
             class="d-flex m-auto text-center form-control me-2 my-5  "

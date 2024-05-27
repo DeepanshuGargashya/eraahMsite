@@ -152,49 +152,54 @@ function HomePage() {
           </div>
         </div>
         {/* <div className="events d-flex justify-content-between row row-cols-2 mx-0"> */}
-        <div className="d-flex justify-content-between px-2">
-          <h5>EVENTS NEAR ME</h5>
-          <p
-            style={{ color: "#929292", cursor: "pointer" }}
-            className="mb-0"
-            onClick={() => navigate("/explore", { state: "events" })}
-          >
-            See All
-          </p>
-        </div>
-        <div className="events d-flex justify-content-between row row-cols-2 mx-0">
-          {notices.slice(0, 2).map((item) => {
-            return (
-              <div class="card eventCard mt-3 px-0">
-                <img
-                  src={Walk}
-                  style={{
-                    width: "100%",
-                    height: "10rem",
-                    objectFit: "fill",
-                  }}
-                  class="card-img-top"
-                  alt="..."
-                />
-                <div class="card-body">
-                  <h5 class="card-title text-left">
-                    {moment(item.date).utc().format("DD MMMM")} |{" "}
-                    {item.time ?? ""} Onwards
-                  </h5>
-                  <h4>{item.title}</h4>
-                  <div className="d-flex align-items-center">
-                    <LocationOnIcon color="primary" />
-                    <h5>{item.location ?? ""}</h5>
+        {notices.length > 0 && (
+          <>
+            <div className="d-flex justify-content-between px-2">
+              <h5>EVENTS NEAR ME</h5>
+              <p
+                style={{ color: "#929292", cursor: "pointer" }}
+                className="mb-0"
+                onClick={() => navigate("/explore", { state: "events" })}
+              >
+                See All
+              </p>
+            </div>
+            <div className="events d-flex justify-content-between row row-cols-2 mx-0">
+              {notices.slice(0, 2).map((item) => {
+                return (
+                  <div class="card eventCard mt-3 px-0">
+                    <img
+                      src={Walk}
+                      style={{
+                        width: "100%",
+                        height: "10rem",
+                        objectFit: "fill",
+                      }}
+                      class="card-img-top"
+                      alt="..."
+                    />
+                    <div class="card-body">
+                      <h5 class="card-title text-left">
+                        {moment(item.date).utc().format("DD MMMM")} |{" "}
+                        {item.time ?? ""} Onwards
+                      </h5>
+                      <h4>{item.title}</h4>
+                      <div className="d-flex align-items-center">
+                        <LocationOnIcon color="primary" />
+                        <h5>{item.location ?? ""}</h5>
+                      </div>
+                      <div className="inr">
+                        {item.entryFee ?? ""}{" "}
+                        {item.entryFee.toLowerCase() === "free" ? "" : "INR"}
+                      </div>
+                    </div>
                   </div>
-                  <div className="inr">
-                    {item.entryFee ?? ""}{" "}
-                    {item.entryFee.toLowerCase() === "free" ? "" : "INR"}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+                );
+              })}
+            </div>
+          </>
+        )}
+        <div style={{ height: "8vh", width: 1 }}></div>
       </div>
       {/* </div> */}
       {/* <LabelBottomNavigation/> */}
