@@ -21,6 +21,8 @@ import Donation from "./Components/Support/donation";
 import TeacherProfile from "./Components/Support/TeacherProfile";
 // import { Login } from "@mui/icons-material";
 import LoginPage from "./Pages/LoginPage";
+import NgoTeacher from "./Components/Explore/ngoTeacher";
+import History from "./Pages/history";
 function App() {
   const location = useLocation();
   const [value, setValue] = React.useState("Home");
@@ -64,6 +66,8 @@ function App() {
             <Route exact path="/chatScreen" element={<ChatScreen />} />
             {/* <Route exact path='/support' element={<Support/>}/> */}
             <Route exact path="/teacher" element={<Teacher />} />
+            <Route exact path="/ngoTeacher" element={<NgoTeacher />} />
+            <Route exact path="/history" element={<History />} />
             <Route exact path="/donation" element={<Donation />} />
             <Route exact path="/TeacherProfile" element={<TeacherProfile />} />
           </Route>

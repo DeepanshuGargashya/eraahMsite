@@ -16,10 +16,15 @@ import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 
-import { getAllTeachersDonors, getNotices } from "../../utils/apiFactory.js";
+import {
+  getAllTeachersDonors,
+  getNgos,
+  getNotices,
+} from "../../utils/apiFactory.js";
 
 function ExploreMain() {
   const location = useLocation();
+  let navigate = useNavigate();
   const [value, changeValue] = useState("teachers");
   const [tags, changeTags] = useState("sort");
 
@@ -27,9 +32,11 @@ function ExploreMain() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [teacherData, setTeacherData] = useState([]);
+  const [selectedNgoId, setSelectedNgoId] = useState("");
   const [filterData, setFilterData] = useState([]);
   // const [loading, setLoading] = useState(true);
   const [notices, setNotices] = useState([]);
+  const [ngos, setNgos] = useState([]);
 
   useEffect(() => {
     setFilterData([]);
@@ -43,12 +50,20 @@ function ExploreMain() {
       (callback) => {
         setTeacherData(callback.data);
         setLoading(false);
-
-        getNotices(
+        getNgos(
           (callback) => {
-            console.log(callback);
-            setNotices(callback.data);
-            setLoading(false);
+            setNgos(callback);
+            getNotices(
+              (callback) => {
+                console.log(callback);
+                setNotices(callback.data);
+                setLoading(false);
+              },
+              (onError) => {
+                console.log(onError);
+                setLoading(false);
+              }
+            );
           },
           (onError) => {
             console.log(onError);
@@ -79,6 +94,14 @@ function ExploreMain() {
             item.name.toLowerCase().includes(e.target.value.toLowerCase())
           )
         );
+      } else if (value === "ngos") {
+        setFilterData(
+          ngos.filter((item) =>
+            item?.school?.schoolName
+              ?.toLowerCase()
+              .includes(e.target.value.toLowerCase())
+          )
+        );
       } else {
         setFilterData(
           notices.filter((item) =>
@@ -97,7 +120,8 @@ function ExploreMain() {
     fetchData();
   }, []);
 
-  const handleDonation = () => {
+  const handleDonation = (id) => {
+    setSelectedNgoId(id);
     setShowDonation(true);
   };
 
@@ -310,63 +334,124 @@ function ExploreMain() {
                   </div>
                 </div>
               </div> */}
-              <div className="row TeacherCards">
-                {search.length > 0
-                  ? filterData.map((da, index) => {
-                      return (
-                        <TeacherCards
-                          key={index}
-                          index={index}
-                          data={da}
-                          image={da.image}
-                        />
-                      );
-                    })
-                  : teacherData.map((da, index) => {
-                      return (
-                        <TeacherCards
-                          key={index}
-                          index={index}
-                          data={da}
-                          image={da.image}
-                        />
-                      );
-                    })}
+              <div className="ngoContainer my-4">
+                <div className="row TeacherCards">
+                  {search.length > 0
+                    ? filterData.map((da, index) => {
+                        return (
+                          <TeacherCards
+                            key={index}
+                            index={index}
+                            data={da}
+                            image={da.image}
+                          />
+                        );
+                      })
+                    : teacherData.map((da, index) => {
+                        return (
+                          <TeacherCards
+                            key={index}
+                            index={index}
+                            data={da}
+                            image={da.image}
+                          />
+                        );
+                      })}
+                </div>
               </div>
+              <div style={{ height: "8vh", width: 1 }}></div>
             </>
           ) : value === "ngos" ? (
             <>
-              <div className="ngoContainer">
-                <div className="row row-cols-2 justify-content-between">
-                  <div className="ngoss" style={{ width: "48%" }}>
-                    <div className="city d-flex justify-content-between">
-                      <div className="d-flex starssss justify-content-center">
-                        <img src={Star} alt="" />
-                        4.5
-                      </div>
-                      <div className="d-flex pointttt justify-content-center">
-                        <img style={{ width: "20%" }} src={Point} alt="" />
-                        Gurgaon
-                      </div>
-                    </div>
-                    <img
-                      className="d-flex m-auto my-3"
-                      style={{ width: "50%" }}
-                      src={Ngo1}
-                      alt=""
-                    />
-                    <h4 className="text-center">YouInYou Foundation</h4>
-                    <p className="text-center">
-                      Supports and uplifts underprivileged children across India
-                    </p>
-                    <div
-                      class="btn btn-primary donateButton mt-4 d-flex m-auto"
-                      onClick={() => handleDonation()}
-                    >
-                      Donate Now
-                    </div>
-                  </div>
-                  <div className="ngoss" style={{ width: "48%" }}>
+              <div className="ngoContainer my-4">
+                <div className="d-flex flex-wrap justify-content-between">
+                  {search.length > 0
+                    ? filterData.map((item, index) => {
+                        return (
+                          <>
+                            <div
+                              className="ngoss my-2"
+                              style={{ width: "45%" }}
+                            >
+                              <div className="city d-flex justify-content-end">
+                                {/* <div className="d-flex starssss justify-content-center">
+                              <img src={Star} alt="" />
+                              4.5
+                            </div> */}
+                                <div className="d-flex pointttt justify-content-center">
+                                  <LocationOnIcon color="primary" />
+                                  {item.school?.city ?? ""}
+                                </div>
+                              </div>
+                              <img
+                                className="d-flex m-auto my-3"
+                                style={{ width: "50%" }}
+                                src={Ngo1}
+                                alt=""
+                              />
+                              <h4 className="text-center">
+                                {item.school?.schoolName ?? ""}
+                              </h4>
+                              <p className="text-center">
+                                Supports and uplifts underprivileged children
+                                across {item.school?.state ?? ""}
+                              </p>
+                              <div
+                                class="btn btn-primary donateButton mt-4 d-flex m-auto"
+                                onClick={() =>
+                                  handleDonation(item.school?._id ?? "")
+                                }
+                              >
+                                Donate Now
+                              </div>
+                            </div>
+                          </>
+                        );
+                      })
+                    : ngos.map((item) => {
+                        return (
+                          <>
+                            <div
+                              className="ngoss my-2"
+                              style={{ width: "45%" }}
+                            >
+                              <div className="city d-flex justify-content-end">
+                                {/* <div className="d-flex starssss justify-content-center">
+                              <img src={Star} alt="" />
+                              4.5
+                            </div> */}
+                                <div className="d-flex pointttt justify-content-center">
+                                  <LocationOnIcon color="primary" />
+                                  {item.school?.city ?? ""}
+                                </div>
+                              </div>
+                              <img
+                                className="d-flex m-auto my-3"
+                                style={{ width: "50%" }}
+                                src={Ngo1}
+                                alt=""
+                              />
+                              <h4 className="text-center">
+                                {item.school?.schoolName ?? ""}
+                              </h4>
+                              <p className="text-center">
+                                Supports and uplifts underprivileged children
+                                across {item.school?.state ?? ""}
+                              </p>
+                              <div
+                                class="btn btn-primary donateButton mt-4 d-flex m-auto"
+                                onClick={() =>
+                                  handleDonation(item.school?._id ?? "")
+                                }
+                              >
+                                Donate Now
+                              </div>
+                            </div>
+                          </>
+                        );
+                      })}
+
+                  {/* <div className="ngoss" style={{ width: "45%" }}>
                     <div className="city d-flex justify-content-between">
                       <div className="d-flex starssss justify-content-center">
                         <img src={Star} alt="" />
@@ -394,7 +479,7 @@ function ExploreMain() {
                       Donate Now
                     </div>
                   </div>
-                  <div className="ngoss mt-3 mb" style={{ width: "48%" }}>
+                  <div className="ngoss mt-3 mb" style={{ width: "45%" }}>
                     <div className="city d-flex justify-content-between">
                       <div className="d-flex starssss justify-content-center">
                         <img src={Star} alt="" />
@@ -421,86 +506,95 @@ function ExploreMain() {
                     >
                       Donate Now
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
+              <div style={{ height: "8vh", width: 1 }}></div>
             </>
           ) : value === "events" ? (
             <>
-              {search.length > 0
-                ? filterData.map((item, index) => {
-                    return (
-                      <div class="card eventCard mt-3 px-0">
-                        <img
-                          src={Walk}
-                          style={{
-                            width: "100%",
-                            height: "10rem",
-                            objectFit: "fill",
-                          }}
-                          class="card-img-top"
-                          alt="..."
-                        />
-                        <div class="card-body">
-                          <h5 class="card-title text-left">
-                            {moment(item.date).utc().format("DD MMMM")} |{" "}
-                            {item.time ?? ""} Onwards
-                          </h5>
-                          <h4>{item.title}</h4>
-                          <div className="d-flex align-items-center">
-                            <LocationOnIcon color="primary" />
-                            <h5>{item.location ?? ""}</h5>
-                          </div>
-                          <div className="inr">
-                            {item.entryFee ?? ""}{" "}
-                            {item?.entryFee?.toLowerCase() === "free"
-                              ? ""
-                              : "INR"}
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })
-                : notices.map((item) => {
-                    return (
-                      <div class="card eventCard mt-3 px-0">
-                        <img
-                          src={Walk}
-                          style={{
-                            width: "100%",
-                            height: "10rem",
-                            objectFit: "fill",
-                          }}
-                          class="card-img-top"
-                          alt="..."
-                        />
-                        <div class="card-body">
-                          <h5 class="card-title text-left">
-                            {moment(item.date).utc().format("DD MMMM")} |{" "}
-                            {item.time ?? ""} Onwards
-                          </h5>
-                          <h4>{item.title}</h4>
-                          <div className="d-flex align-items-center">
-                            <LocationOnIcon color="primary" />
-                            <h5>{item.location ?? ""}</h5>
-                          </div>
-                          <div className="inr">
-                            {item.entryFee ?? ""}{" "}
-                            {item.entryFee.toLowerCase() === "free"
-                              ? ""
-                              : "INR"}
+              <div className="ngoContainer my-4">
+                {search.length > 0
+                  ? filterData.map((item, index) => {
+                      return (
+                        <div class="card eventCard mt-3 px-0">
+                          <img
+                            src={Walk}
+                            style={{
+                              width: "100%",
+                              height: "10rem",
+                              objectFit: "fill",
+                            }}
+                            class="card-img-top"
+                            alt="..."
+                          />
+                          <div class="card-body">
+                            <h5 class="card-title text-left">
+                              {moment(item.date).utc().format("DD MMMM")} |{" "}
+                              {item.time ?? ""} Onwards
+                            </h5>
+                            <h4>{item.title}</h4>
+                            <div className="d-flex align-items-center">
+                              <LocationOnIcon color="primary" />
+                              <h5>{item.location ?? ""}</h5>
+                            </div>
+                            <div className="inr">
+                              {item.entryFee ?? ""}{" "}
+                              {item?.entryFee?.toLowerCase() === "free"
+                                ? ""
+                                : "INR"}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    })
+                  : notices.map((item) => {
+                      return (
+                        <div class="card eventCard mt-3 px-0">
+                          <img
+                            src={Walk}
+                            style={{
+                              width: "100%",
+                              height: "10rem",
+                              objectFit: "fill",
+                            }}
+                            class="card-img-top"
+                            alt="..."
+                          />
+                          <div class="card-body">
+                            <h5 class="card-title text-left">
+                              {moment(item.date).utc().format("DD MMMM")} |{" "}
+                              {item.time ?? ""} Onwards
+                            </h5>
+                            <h4>{item.title}</h4>
+                            <div className="d-flex align-items-center">
+                              <LocationOnIcon color="primary" />
+                              <h5>{item.location ?? ""}</h5>
+                            </div>
+                            <div className="inr">
+                              {item.entryFee ?? ""}{" "}
+                              {item.entryFee.toLowerCase() === "free"
+                                ? ""
+                                : "INR"}
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+              </div>
+              <div style={{ height: "8vh", width: 1 }}></div>
             </>
           ) : (
             ""
           )}
         </div>
+      ) : selectedNgoId.length > 0 ? (
+        <Explore
+          setShowDonation={setShowDonation}
+          selectedNgoId={selectedNgoId}
+        />
       ) : (
-        <Explore />
+        navigate("/explore")
       )}
     </>
   );

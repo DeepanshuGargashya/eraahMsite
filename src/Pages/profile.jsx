@@ -10,16 +10,17 @@ import Payment from "../Assets/payment.png";
 import Security from "../Assets/security.png";
 import Noti from "../Assets/noti.png";
 import Privacy from "../Assets/privacy.png";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import LogoutIcon from "@mui/icons-material/Logout";
 
 function Profile() {
   const data = JSON.parse(localStorage.getItem("donor"));
+  let navigate = useNavigate();
   return (
     <>
       <div className="container px-0 pb-5">
-        <div className="header pt-4 pb-2">
+        <div className="header p-4 px-3">
           <div className="d-flex align-items-center" style={{ color: "white" }}>
             <NavLink to="/" style={{ color: "white" }}>
               <ArrowBackIcon />
@@ -33,7 +34,13 @@ function Profile() {
         <p className="text-center">{data.email ?? ""}</p>
 
         <div className="d-flex justify-content-between px-4">
-          <div className="donation">
+          <div
+            className="donation"
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              navigate("/history");
+            }}
+          >
             <img className="d-flex m-auto" src={Donate} alt="" />
             <p className="text-center">Donation History</p>
           </div>

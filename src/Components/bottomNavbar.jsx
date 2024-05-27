@@ -85,17 +85,16 @@ export default function LabelBottomNavigation() {
           </div>
         </NavLink>
       </li>
-      <li
-        onClick={() => handleClick("Chats")}
-        className={value === "Chats" ? "active" : ""}
-      >
+      <li className={location.pathname === "/chats" ? "active " : ""}>
         <NavLink
           style={{ textDecoration: "none", color: "#929292" }}
           to="/chats"
         >
           <div
             className="d-flex flex-column align-items-center"
-            style={{ color: value === "Chats" ? "#6100FF" : "#929292" }}
+            style={{
+              color: location.pathname === "/chats" ? "#6100FF" : "#929292",
+            }}
           >
             <ChatIcon />
             Chats
@@ -103,8 +102,8 @@ export default function LabelBottomNavigation() {
         </NavLink>
       </li>
       <li
-        onClick={() => handleClick("Updates")}
-        className={value === "Updates" ? "active" : ""}
+        // onClick={() => handleClick("Updates")}
+        className={location.pathname === "/updates" ? "active " : ""}
       >
         <NavLink
           style={{ textDecoration: "none", color: "#929292" }}
@@ -112,7 +111,9 @@ export default function LabelBottomNavigation() {
         >
           <div
             className="d-flex flex-column align-items-center"
-            style={{ color: value === "Updates" ? "#6100FF" : "#929292" }}
+            style={{
+              color: location.pathname === "/updates" ? "#6100FF" : "#929292",
+            }}
           >
             <NotificationsIcon />
             Updates
@@ -120,8 +121,8 @@ export default function LabelBottomNavigation() {
         </NavLink>
       </li>
       <li
-        onClick={() => handleClick("Impact")}
-        className={value === "Impact" ? "active" : ""}
+        // onClick={() => handleClick("Impact")}
+        className={location.pathname === "/impact" ? "active" : ""}
       >
         <NavLink
           style={{ textDecoration: "none", color: "#929292" }}
@@ -129,7 +130,9 @@ export default function LabelBottomNavigation() {
         >
           <div
             className="d-flex flex-column align-items-center"
-            style={{ color: value === "Impact" ? "#6100FF" : "#929292" }}
+            style={{
+              color: location.pathname === "/impact" ? "#6100FF" : "#929292",
+            }}
           >
             <FolderIcon />
             Impact

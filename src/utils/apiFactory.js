@@ -62,3 +62,59 @@ export const getNotices = (callback, onError) => {
       onError(err);
     });
 };
+export const getNgos = (callback, onError) => {
+  axios
+    .get(
+      process.env.REACT_APP_baseUrl +
+        `/donorNgos?id=${JSON.parse(localStorage.getItem("donor"))._id}`
+    )
+    .then((res) => {
+      callback(res.data.error ? [] : res.data.data);
+    })
+    .catch((err) => {
+      onError(err);
+    });
+};
+export const getNgosTeachers = (ngoId, callback, onError) => {
+  axios
+    .get(
+      process.env.REACT_APP_baseUrl +
+        `/admin/getNgoTeachers?id=${
+          JSON.parse(localStorage.getItem("donor"))._id
+        }&ngoId=${ngoId}`
+    )
+    .then((res) => {
+      callback(res.data.error ? [] : res.data.data);
+    })
+    .catch((err) => {
+      onError(err);
+    });
+};
+export const getNgoDetails = (ngoId, callback, onError) => {
+  axios
+    .get(
+      process.env.REACT_APP_baseUrl +
+        `/admin/getNgoDetails?id=${
+          JSON.parse(localStorage.getItem("donor"))._id
+        }&ngoId=${ngoId}`
+    )
+    .then((res) => {
+      callback(res.data.error ? [] : res.data.data);
+    })
+    .catch((err) => {
+      onError(err);
+    });
+};
+export const getDonationHistory = (callback, onError) => {
+  axios
+    .get(
+      process.env.REACT_APP_baseUrl +
+        `/donorHistory?id=${JSON.parse(localStorage.getItem("donor"))._id}`
+    )
+    .then((res) => {
+      callback(res.data.error ? [] : res.data.data);
+    })
+    .catch((err) => {
+      onError(err);
+    });
+};
