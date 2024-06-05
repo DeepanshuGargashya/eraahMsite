@@ -5,12 +5,16 @@ import fakeAnand from "../../Assets/fakeAnand.png";
 import teacherSupportImg1 from "../../Assets/teacher-support-img1.png";
 import teacherSupportImg2 from "../../Assets/teacher-support-img2.png";
 import childimage from "../../Assets/child-image.png";
-import { getTeacherDetailsDonor } from "../../utils/apiFactory";
+import {
+  getGalleryImages,
+  getTeacherDetailsDonor,
+} from "../../utils/apiFactory";
 export default function TeacherProfile() {
   const [loading, setLoading] = useState(0);
   const [showDonate, setShowDonate] = useState(true);
   const [amount, setamount] = useState(0);
   const [profiledata, setProfileData] = useState({});
+  const [gallery, setGallery] = useState([]);
   const navigate = useNavigate();
   const location = useLocation();
   const [margin, setmargin] = useState();
@@ -33,8 +37,22 @@ export default function TeacherProfile() {
     getTeacherDetailsDonor(
       location.state,
       (callback) => {
-        setLoading(false);
         setProfileData(callback);
+        var payload = {
+          ngoId: callback.school._id,
+          teacherId: callback._id,
+        };
+        getGalleryImages(
+          payload,
+          (callback) => {
+            setGallery(callback.data);
+
+            setLoading(false);
+          },
+          (onError) => {
+            setLoading(false);
+          }
+        );
       },
       (onError) => {
         setLoading(false);
@@ -112,8 +130,19 @@ export default function TeacherProfile() {
                 </div>
                 <div className="profileimg">
                   <div className="imgs">
-                    <div className="circle">
-                      <img src={fakeAnand} width={"100%"} alt="" />
+                    <div
+                      className="circle"
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <img
+                        src={profiledata.photoUrl}
+                        style={{ width: "50px", height: "50px" }}
+                        alt=""
+                      />
                     </div>
                   </div>
                   <div className="text">
@@ -202,7 +231,7 @@ export default function TeacherProfile() {
           </div>
           <div className="imagess">
             <div className="imagebox">
-              <img src={teacherSupportImg1} alt="image1" width={"55%"} />
+              {/* <img src={teacherSupportImg1} alt="image1" width={"55%"} />
               <div className="imgg">
                 <div className="imgrowss">
                   <img src={teacherSupportImg2} alt="image" width={"60%"} />
@@ -214,6 +243,90 @@ export default function TeacherProfile() {
                   <img src={teacherSupportImg2} alt="image" width={"60%"} />
                   <img src={teacherSupportImg2} alt="image" width={"60%"} />
                 </div>
+              </div> */}
+
+              <div
+                // style={{
+                //   display: "flex",
+                //   flexDirection: "row",
+                // }}
+                className="imgrowss"
+              >
+                {gallery.map((value, index) => {
+                  console.log("index is " + index);
+                  console.log(gallery[index + 1]);
+                  return (
+                    <>
+                      {index !== 0 && index % 2 === 0 ? (
+                        <></>
+                      ) : (
+                        <>
+                          {index === 0 ||
+                          (gallery.length === index + 1 &&
+                            gallery.length % 2 === 0) ? (
+                            <div
+                              style={{
+                                width: "200px",
+                                height: "12rem",
+                                // backgroundColor: "red",
+                              }}
+                            >
+                              {/* <img src={value} /> */}
+                              <img
+                                src={value.picUrl}
+                                style={{ width: "200px", height: "12rem" }}
+                                alt=""
+                                srcset=""
+                              />
+                            </div>
+                          ) : (
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "space-between",
+                              }}
+                            >
+                              <div
+                                style={{
+                                  width: "148px",
+                                  height: "5.99rem",
+                                  // backgroundColor: "green",
+                                }}
+                              >
+                                <img
+                                  src={value.picUrl}
+                                  style={{ width: "148px", height: "5.99rem" }}
+                                  alt=""
+                                  srcset=""
+                                />
+                              </div>
+                              {index + 1 <= gallery.length && (
+                                <div
+                                  style={{
+                                    width: "148px",
+                                    height: "5.99rem",
+                                    // backgroundColor: "green",
+                                  }}
+                                >
+                                  <img
+                                    src={gallery[index + 1]?.picUrl}
+                                    style={{
+                                      width: "148px",
+                                      height: "5.99rem",
+                                    }}
+                                    alt=""
+                                    srcset=""
+                                  />
+                                </div>
+                              )}
+                            </div>
+                          )}
+                        </>
+                      )}
+                    </>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -251,8 +364,19 @@ export default function TeacherProfile() {
               profiledata.studentsList.map((value, index) => {
                 return (
                   <div className="imgs" key={index}>
-                    <div className="circle">
-                      <img src={childimage} alt="Image" width={"100%"} />
+                    <div
+                      className="circle"
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <img
+                        src={value.photoUrl}
+                        style={{ width: "50px", height: "50px" }}
+                        alt=""
+                      />
                     </div>
                     <h5>{value.name}</h5>
                   </div>

@@ -28,8 +28,19 @@ export default function TeacherCards({ index, data, image }) {
             </div>
           </div> */}
           <div className="mainprofile">
-            <div className="circle">
-              <img src={Anand} width={"100%"} alt="" />
+            <div
+              className="circle"
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <img
+                src={data.photoUrl}
+                style={{ width: "50px", height: "50px" }}
+                alt=""
+              />
             </div>
             <h5 className="nametext">{data.name}</h5>
             <p className="teacher-about">

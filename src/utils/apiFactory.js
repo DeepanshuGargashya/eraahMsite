@@ -118,3 +118,15 @@ export const getDonationHistory = (callback, onError) => {
       onError(err);
     });
 };
+export const getGalleryImages = (payload, callback, onError) => {
+  // conso;
+  axios
+    .post(`${process.env.REACT_APP_baseUrl}/NGO/getGallery`, payload)
+    .then((result) => {
+      callback(result.data);
+    })
+    .catch((e) => {
+      console.log(e);
+      onError(e);
+    });
+};
