@@ -1,7 +1,17 @@
 import { useNavigate } from "react-router-dom";
 import Anand from "../Assets/anand.png";
+import React, { useState, useEffect } from "react";
 export default function TeacherCards({ index, data, image }) {
   const navigate = useNavigate();
+  const [teachSubjects, setTeachSubjects] = useState("");
+  useEffect(() => {
+    let subjects = "";
+    data?.teachSubject?.map((value, idx) => {
+      subjects = subjects + (idx === 0 ? "" : ", ") + value?.subName;
+    });
+    setTeachSubjects(subjects);
+    console.log(subjects);
+  }, [data]);
   return (
     <>
       <div
@@ -38,20 +48,18 @@ export default function TeacherCards({ index, data, image }) {
             >
               <img
                 src={data.photoUrl}
-                style={{ width: "50px", height: "50px" }}
+                style={{ width: "68px", height: "68px", borderRadius: "50%" }}
                 alt=""
               />
             </div>
             <h5 className="nametext">{data.name}</h5>
             <p className="teacher-about">
-              {data?.teachSubject?.subName.length +
-                data?.school?.schoolName.length >
-              22
-                ? `${data?.teachSubject?.subName ?? "NA"} teacher for ${
-                    data?.school?.schoolName ?? "NA"
+              {teachSubjects.length + data?.school?.schoolName.length > 22
+                ? `${teachSubjects ?? ""} teacher for ${
+                    data?.school?.schoolName ?? ""
                   }`.substring(0, 35) + "..."
-                : `${data?.teachSubject?.subName ?? "NA"} teacher for ${
-                    data?.school?.schoolName ?? "NA"
+                : `${teachSubjects ?? ""} teacher for ${
+                    data?.school?.schoolName ?? ""
                   }`}
             </p>
             <p

@@ -86,27 +86,31 @@ function Teacher() {
           </div>
         </div>
         <div className="row TeacherCards">
-          {search.length > 0
-            ? filterTeacherData.map((da, index) => {
-                return (
-                  <TeacherCards
-                    key={index}
-                    index={index}
-                    data={da}
-                    image={da.image}
-                  />
-                );
-              })
-            : teacherData.map((da, index) => {
-                return (
-                  <TeacherCards
-                    key={index}
-                    index={index}
-                    data={da}
-                    image={da.image}
-                  />
-                );
-              })}
+          {teacherData && teacherData.length && (
+            <>
+              {search.length > 0
+                ? filterTeacherData.map((da, index) => {
+                    return (
+                      <TeacherCards
+                        key={index}
+                        index={index}
+                        data={da}
+                        image={da.image}
+                      />
+                    );
+                  })
+                : teacherData.map((da, index) => {
+                    return (
+                      <TeacherCards
+                        key={index}
+                        index={index}
+                        data={da}
+                        image={da.image}
+                      />
+                    );
+                  })}
+            </>
+          )}
         </div>
       </div>
     </>
@@ -117,6 +121,18 @@ export default Teacher;
 
 function TeacherCards({ index, data, image }) {
   const navigate = useNavigate();
+  const [teachSubjects, setTeachSubjects] = useState("");
+  useEffect(() => {
+    let subjects = "";
+    data?.teachSubject?.map((value, idx) => {
+      subjects = subjects + (idx === 0 ? "" : ", ") + value?.subName;
+    });
+    setTeachSubjects(subjects);
+    console.log(subjects);
+  }, [data]);
+
+  console.log("teachSubjects");
+  console.log(teachSubjects);
   return (
     <>
       <div
@@ -148,14 +164,12 @@ function TeacherCards({ index, data, image }) {
             </div>
             <h5 className="nametext">{data.name}</h5>
             <p className="teacher-about">
-              {data?.teachSubject?.subName.length +
-                data?.school?.schoolName.length >
-              22
-                ? `${data?.teachSubject?.subName ?? "NA"} teacher for ${
-                    data?.school?.schoolName ?? "NA"
+              {teachSubjects.length + data?.school?.schoolName.length > 22
+                ? `${teachSubjects ?? ""} teacher for ${
+                    data?.school?.schoolName ?? ""
                   }`.substring(0, 35) + "..."
-                : `${data?.teachSubject?.subName ?? "NA"} teacher for ${
-                    data?.school?.schoolName ?? "NA"
+                : `${teachSubjects ?? ""} teacher for ${
+                    data?.school?.schoolName ?? ""
                   }`}
             </p>
             <p

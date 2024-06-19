@@ -146,13 +146,17 @@ function HomePage() {
         </div>
         <div className="Teacher-support">
           <div className="row TeacherCards">
-            {teacherData.slice(0, 2).map((item, index) => {
-              return <TeacherCards index={index} data={item} image={""} />;
-            })}
+            {teacherData && teacherData.length > 0 && (
+              <>
+                {teacherData.slice(0, 2).map((item, index) => {
+                  return <TeacherCards index={index} data={item} image={""} />;
+                })}
+              </>
+            )}
           </div>
         </div>
         {/* <div className="events d-flex justify-content-between row row-cols-2 mx-0"> */}
-        {notices.length > 0 && (
+        {notices !== null && notices.length > 0 && (
           <>
             <div className="d-flex justify-content-between px-2">
               <h5>EVENTS NEAR ME</h5>

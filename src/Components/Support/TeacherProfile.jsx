@@ -140,7 +140,12 @@ export default function TeacherProfile() {
                     >
                       <img
                         src={profiledata.photoUrl}
-                        style={{ width: "50px", height: "50px" }}
+                        style={{
+                          width: "82px",
+                          height: "82px",
+                          objectFit: "cover",
+                          borderRadius: "50%",
+                        }}
                         alt=""
                       />
                     </div>
@@ -340,14 +345,24 @@ export default function TeacherProfile() {
             <div className="col-6 presentcolumn">
               <div className="colss-present">
                 <div className="circle">
-                  <h5>88%</h5>
+                  <h5>
+                    {(profiledata?.attendance?.presentPercent ?? 0).toString()}%
+                  </h5>
                 </div>
               </div>
             </div>
             <div className="col-6">
               <div className="colss-absent">
                 <div className="circle">
-                  <h5>12%</h5>
+                  <h5>
+                    {" "}
+                    {profiledata?.attendance?.total
+                      ? (
+                          100 - (profiledata?.attendance?.presentPercent ?? 100)
+                        ).toString()
+                      : "0"}
+                    %
+                  </h5>
                 </div>
               </div>
             </div>
